@@ -60,19 +60,14 @@ public class ClockWidgetProvider extends AppWidgetProvider {
         views.setTextViewText(R.id.time, df_hm.format(now.getTime()));
 
         List<String> calendarList = LunarCalendar.getLunarCalendarStr(new Date());
-        views.setTextViewText(R.id.solar_date, String.format(
-                context.getString(R.string.solar_date_widget),
+        views.setTextViewText(R.id.solar_and_lunar_date, String.format(
+                context.getString(R.string.solar_and_lunar_date_widget),
                 calendarList.get(7),
                 calendarList.get(9),
-                calendarList.get(4)
-        ));
-        views.setTextViewText(R.id.lunar_date, String.format(
-                context.getString(R.string.lunar_date),
+                calendarList.get(4),
                 calendarList.get(1),
                 calendarList.get(2)
         ));
-
-        views.setTextViewText(R.id.week_day, weeks[now.get(Calendar.DAY_OF_WEEK) - 1]);
 
         String today = now.get(Calendar.DAY_OF_MONTH) + "";
 
@@ -90,12 +85,10 @@ public class ClockWidgetProvider extends AppWidgetProvider {
         for (int i = 0; i < 3; i++) {
             if (i == activePos) {
                 views.setTextColor(dateIds[i],
-                        ContextCompat.getColor(context, R.color.textOrIcons));
-                views.setInt(dateIds[i], "setBackgroundResource", R.drawable.circle_bg);
+                        ContextCompat.getColor(context, R.color.colorAccent));
             } else {
                 views.setTextColor(dateIds[i],
                         ContextCompat.getColor(context, R.color.secondaryText));
-                views.setInt(dateIds[i], "setBackgroundResource", R.color.textOrIcons);
             }
 
             views.setTextViewText(dateIds[i], dateStr[i]);
@@ -233,7 +226,7 @@ public class ClockWidgetProvider extends AppWidgetProvider {
         super.onEnabled(context);
         AlarmManager alarmMgr = (AlarmManager) context.getSystemService(
                 Context.ALARM_SERVICE);
-        long intervalClock = 60000;
+        long intervalClock = 1000;
         long intervalWeather = 7200000;
 
         Calendar calendar = Calendar.getInstance();

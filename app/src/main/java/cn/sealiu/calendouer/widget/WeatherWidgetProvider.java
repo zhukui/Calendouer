@@ -54,17 +54,15 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
 
         // init calendar
         List<String> calendarList = LunarCalendar.getLunarCalendarStr(new Date());
-        views.setTextViewText(R.id.solar_date, String.format(
-                context.getString(R.string.solar_date_widget),
+        views.setTextViewText(R.id.solar_and_lunar_date, String.format(
+                context.getString(R.string.solar_and_lunar_date_widget),
                 calendarList.get(7),
                 calendarList.get(9),
-                calendarList.get(4)
-        ));
-        views.setTextViewText(R.id.lunar_date, String.format(
-                context.getString(R.string.lunar_date),
+                calendarList.get(4),
                 calendarList.get(1),
                 calendarList.get(2)
         ));
+
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1);
         String tomorrowStr = df_md.format(today.getTime());
